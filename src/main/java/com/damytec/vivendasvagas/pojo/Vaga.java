@@ -10,14 +10,16 @@ public abstract class Vaga implements Comparable {
     int width;
     int height;
     private String nome;
+    private Corredor corredor;
     private Estado estado = new Estado();
 
-    public Vaga(int x, int y, int width, int height, String nome) {
+    public Vaga(int x, int y, int width, int height, String nome, Corredor corredor) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height= height;
         this.nome = nome;
+        this.corredor =  corredor;
     }
 
     public int getX() {
@@ -30,6 +32,10 @@ public abstract class Vaga implements Comparable {
 
     public String getNome() {
         return nome;
+    }
+
+    public Corredor getCorredor() {
+        return corredor;
     }
 
     public String getDescription() {
@@ -59,6 +65,11 @@ public abstract class Vaga implements Comparable {
     }
     public void unselect() {
         this.getEstado().setSelecionada(false);
+    }
+
+    public enum Corredor {
+        ESQUERDA,
+        DIREITA
     }
 
     @Override

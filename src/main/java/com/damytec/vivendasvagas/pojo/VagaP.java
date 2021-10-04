@@ -8,6 +8,6 @@ import com.damytec.vivendasvagas.util.Constant;
 public class VagaP extends Vaga {
 
     public VagaP(int x, int y, String nome) {
-        super(x, y, Constant.P_W,Constant.P_H, nome);
+        super(x, y, Constant.P_W,Constant.P_H, nome,Corredor.DIREITA);
     }
 }

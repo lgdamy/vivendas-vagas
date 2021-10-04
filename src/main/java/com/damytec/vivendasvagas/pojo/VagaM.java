@@ -8,7 +8,7 @@ import static com.damytec.vivendasvagas.util.Constant.M_W;
  */
 public class VagaM extends Vaga {
 
-    public VagaM(int x, int y, String nome) {
-        super(x, y, M_W, M_H, nome);
+    public VagaM(int x, int y, String nome, Corredor corredor) {
+        super(x, y, M_W, M_H, nome, corredor);
     }
 }

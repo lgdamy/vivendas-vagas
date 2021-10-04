@@ -13,7 +13,7 @@ public class Constant {
     public static final int P_W = 90;
     public static final int CANVAS_H = 480;
     public static final int CANVAS_W = 640;
-    public static final int COLUNA = 15;
+    public static final int COLUNA = 20;
     public static final int BORDER = 5;
 //    public static final int CORREDOR = 120;
     public static final int CORREDOR = (CANVAS_W - 2 * BORDER - 3 * M_W - P_W) / 2;

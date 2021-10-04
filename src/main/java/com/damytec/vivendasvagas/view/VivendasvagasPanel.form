@@ -14,7 +14,7 @@
         <border type="none"/>
         <children/>
       </grid>
-      <grid id="3b38c" binding="rightMenuPanel" custom-create="true" layout-manager="GridBagLayout">
+      <grid id="3b38c" binding="rightMenuPanel" layout-manager="GridBagLayout">
         <constraints border-constraint="East"/>
         <properties/>
         <border type="empty">
