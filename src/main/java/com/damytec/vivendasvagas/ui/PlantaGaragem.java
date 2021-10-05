@@ -63,6 +63,7 @@ public class PlantaGaragem extends JPanel {
     }
 
     private static void caixadaguaEscadaElevador(Graphics2D g2d) {
+        g2d.setFont(new Font(Font.MONOSPACED, Font.BOLD, 14));
         g2d.setPaint(Color.DARK_GRAY);
         g2d.fillPolygon(new Polygon(new int[]{BORDER, BORDER + M_W , 3 * M_W / 2 + BORDER, 3 * M_W / 2 + BORDER , BORDER},new int[]{BORDER + 7 * M_H + 4 * COLUNA, BORDER + 7 * M_H + 4 * COLUNA, CANVAS_H - BORDER, CANVAS_H - BORDER, CANVAS_H - BORDER }, 5));
         g2d.fillRect(BORDER + 2 * M_W + CORREDOR + COLUNA, 6 * M_H + 5 * COLUNA + BORDER,M_W - COLUNA,2 * M_H - COLUNA);
@@ -72,13 +73,14 @@ public class PlantaGaragem extends JPanel {
         g2d.drawRect(BORDER + 2 * M_W + CORREDOR + COLUNA, 6 * M_H + 5 * COLUNA + BORDER,M_W - COLUNA,2 * M_H - COLUNA);
         g2d.drawRect(BORDER + 2 * M_W + CORREDOR , 4 * M_H + 2 * COLUNA + BORDER ,M_W,2 * M_H + COLUNA);
         g2d.setPaint(Color.WHITE);
-        g2d.drawString("CAIXA", BORDER * 2, BORDER + 7 * M_H + 5 * COLUNA);
-        g2d.drawString("D'\u00c1GUA", BORDER * 2, BORDER + 7 * M_H + 5 * COLUNA + 14);
-        g2d.drawString("ESCADARIA", 2 * M_W + CORREDOR + 2 * BORDER, 4 * M_H + BORDER + 3 * COLUNA);
-        g2d.drawString("ELEVADOR",  2 * BORDER + 2 * M_W + CORREDOR + COLUNA , 6 * M_H + 6 * COLUNA + BORDER );
+        g2d.drawString("Caixa", BORDER * 2, BORDER + 7 * M_H + 5 * COLUNA);
+        g2d.drawString("d'\u00e1gua", BORDER * 2, BORDER + 7 * M_H + 5 * COLUNA + 16);
+        g2d.drawString("Escadaria", 2 * M_W + CORREDOR + 2 * BORDER, 4 * M_H + BORDER + 3 * COLUNA);
+        g2d.drawString("Elevador",  2 * BORDER + 2 * M_W + CORREDOR + COLUNA , 6 * M_H + 6 * COLUNA + BORDER );
     }
 
     private static void vagas(Graphics2D g2d, List<Vaga> vagas) {
+        g2d.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
         vagas.forEach(v -> {
             if (v.isSelecionada() && v.getEstado().isOcupada()) {
                 g2d.setColor(Color.ORANGE);
@@ -106,13 +108,13 @@ public class PlantaGaragem extends JPanel {
         g2d.fillOval(BORDER + M_W - COLUNA, BORDER + 4 * M_H + COLUNA, COLUNA, COLUNA);
         g2d.fillOval(BORDER + M_W - COLUNA, BORDER + 6 * M_H + 2 * COLUNA, COLUNA, COLUNA);
 
-        g2d.fillOval(BORDER + M_W + CORREDOR, BORDER + 2 * M_H, COLUNA, COLUNA);
+        g2d.fillOval(BORDER + M_W + CORREDOR +  2 * COLUNA, BORDER + 2 * M_H, COLUNA, COLUNA);
         g2d.fillOval(BORDER + M_W + CORREDOR, BORDER + 3 * M_H + COLUNA, COLUNA, COLUNA);
         g2d.fillOval(BORDER + M_W + CORREDOR, BORDER + 4 * M_H + 2 * COLUNA, COLUNA, COLUNA);
         g2d.fillOval(BORDER + M_W + CORREDOR, BORDER + 6 * M_H + 3 * COLUNA, COLUNA, COLUNA);
         g2d.fillOval(BORDER + M_W + CORREDOR, BORDER + 8 * M_H + 4 * COLUNA, COLUNA, COLUNA);
 
-        g2d.fillOval(BORDER + 2 * M_W + CORREDOR - COLUNA / 2, BORDER + 2 * M_H, COLUNA, COLUNA);
+        g2d.fillOval(BORDER + 2 * M_W + CORREDOR + COLUNA / 2, BORDER + 2 * M_H, COLUNA, COLUNA);
         g2d.fillOval(BORDER + 2 * M_W + CORREDOR - COLUNA / 2, BORDER + 3 * M_H + COLUNA, COLUNA, COLUNA);
 
         g2d.fillOval(BORDER + 3 * M_W + CORREDOR - COLUNA, BORDER + 2 * M_H, COLUNA, COLUNA);
@@ -150,11 +152,12 @@ public class PlantaGaragem extends JPanel {
         }
         if (!corredor.isPresent() || Corredor.ESQUERDA == corredor.get()) {
             g2d.drawArc(CANVAS_W - 169, CANVAS_H - 20, 100, 100, 0, 90);
-            g2d.drawLine(CANVAS_W - 122, CANVAS_H - 20, CANVAS_W - 250, CANVAS_H - 20);
+            g2d.drawArc(BORDER + M_W + CORREDOR / 2, CANVAS_H - 150, 130,130,180,90);
+            g2d.drawLine(BORDER + M_W + CORREDOR+4, CANVAS_H - 20,CANVAS_W - 122, CANVAS_H - 20 );
             t1 = g2d.getTransform();
             t2 = (AffineTransform)t1.clone();
-            t2.translate(CANVAS_W - 278, CANVAS_H - 20);
-            t2.rotate(Math.toRadians(90));
+            t2.translate(BORDER + M_W + CORREDOR / 2, CANVAS_H - 110);
+            t2.rotate(Math.toRadians(180));
             t2.scale(2.5f,2.5f);
             g2d.setTransform(t2);
             g2d.fill(PONTA_SETA);
@@ -177,9 +180,9 @@ public class PlantaGaragem extends JPanel {
         g2d.fill(PONTA_SETA);
 
         t2 = (AffineTransform)t1.clone();
+        t2.translate(drag.getDestino().getX() - BORDER -25 * Math.cos(angulo), drag.getDestino().getY() - BORDER - 25 * Math.sin(angulo));
         g2d.setStroke(new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
         g2d.setTransform(t2);
-        g2d.translate(drag.getDestino().getX() - BORDER + - 25 * Math.cos(angulo), drag.getDestino().getY() - BORDER - 25 * Math.sin(angulo) );
         g2d.setColor(Color.BLACK);
         g2d.drawOval(-10,-10,20,20);
         g2d.setColor(Color.WHITE);
